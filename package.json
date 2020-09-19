@@ -4,10 +4,9 @@
     "private": true,
     "main": "app.js",
     "scripts": {
-        "build:svg": "npx @svgr/cli -d src/components src/svg ",
         "start": "node ./bin/www"
     },
-    "homepage": "https://github.com/ChapeauR0uge/archives_centrales",
+    "homepage": "https://github.com/ChapeauR0uge/archives-centrales-backend",
     "devDependencies": {
         "@babel/core": "^7.11.6",
         "@babel/preset-env": "^7.11.5",
