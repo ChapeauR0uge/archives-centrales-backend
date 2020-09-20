@@ -27,10 +27,12 @@
 
 @font-face {
     font-family: '3Dventure';
-    src:url('./fonts/3Dventure.ttf.woff') format('woff'),
-    url('./fonts/3Dventure.ttf.svg#3Dventure') format('svg'),
+    src:local('3Dventure'),
+    url('./fonts/3Dventure.ttf.woff') format('woff'),
+    url('./fonts/3Dventure.ttf.svg') format('svg'),
     url('./fonts/3Dventure.ttf.eot'),
-    url('./fonts/3Dventure.ttf.eot?#iefix') format('embedded-opentype');
+    url('./fonts/3Dventure.ttf.eot') format('embedded-opentype');
+    font-display:swap;
     font-weight: normal;
     font-style: normal;
 }
