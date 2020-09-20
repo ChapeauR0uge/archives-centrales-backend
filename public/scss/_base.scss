@@ -1,0 +1,17 @@
+
+*,
+:before,
+:after {
+    box-sizing: border-box;
+}
+
+:root {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    font-size: 1rem;
+}
+
+html {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}

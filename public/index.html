@@ -1,33 +1,41 @@
+<!DOCTYPE html>
 <html lang="fr">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="r0uge | Une api au service de l'archive">
+        <meta name="keywords" content="rouge, r0uge.eu ,api, API, archive, centrales">
+        <link rel="stylesheet" href="./scss/fonts.scss">
+        <link rel="stylesheet" href="./scss/main.scss">
         <style type="text/css" >
             @font-face {
                 font-family: '3Dventure';
-                src:url('3Dventure.ttf.woff') format('woff'),
-                url('3Dventure.ttf.svg#3Dventure') format('svg'),
-                url('3Dventure.ttf.eot'),
-                url('3Dventure.ttf.eot?#iefix') format('embedded-opentype');
+                src:url('polices/3Dventure.ttf.woff') format('woff'),
+                url('polices/3Dventure.ttf.svg#3Dventure') format('svg'),
+                url('polices/3Dventure.ttf.eot'),
+                url('polices/3Dventure.ttf.eot?#iefix') format('embedded-opentype');
                 font-weight: normal;
                 font-style: normal;
             }
-            h1 {
-                font-family: '3Dventure';
-            }
-            body {
-                background-color: #f5f5f5;
-            }
-            .center{
-                top:0;
-                bottom:0;
-                right:0;
-                left:-300px;
-                width:200px;
-                height:200px;
-                margin:auto;
+            #loader {
                 position:fixed;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-family: '3Dventure';
+                font-size:100px;
+                color:#b22222;
+                top:0;
+                left:0;
+                height: 100vh;
+                width: 100vw;
+                overflow: hidden;
+                z-index: 9999;
+                background-color: #f5f5f5;
+
             }
             .pulsing{
-	            animation: pulse 4s infinite;
+                animation: pulse 4s infinite;
             }
             @keyframes pulse {
 	               0% {
@@ -47,11 +55,8 @@
         <title>r0uge.eu</title>
     </head>
     <body>
-            <h1 class="pulsing center" style="
-                color:#b22222;
-                font-size:100px;
-                "
-
-            >r0uge.eu<br><h1>
+        <div id="loader">
+            <span class="pulsing">r0uge.eu</span>
+        </div>
     </body>
 </html>
