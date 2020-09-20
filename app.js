@@ -24,11 +24,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes utilisateurs
-app.use('/api/users', userRouter);
+app.use('/users', userRouter);
 // routes authentification
-app.use('/api/auth', authRouter);
+app.use('/auth', authRouter);
 // routes apiREST
-app.use('/api', apiRESTrouter);
+app.use('/', apiRESTrouter);
 
 //Par default
 app.get('/*', (req, res) => {

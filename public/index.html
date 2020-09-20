@@ -7,15 +7,22 @@
         <meta name="keywords" content="rouge, r0uge.eu ,api, API, archive, centrales">
         <link rel="stylesheet" href="./css/fonts.css">
         <link rel="stylesheet" href="./css/main.css">
+        <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
         <style type="text/css" >
+            #logo{
+                font-family: '3Dventure';
+                font-size:5rem;
+                text-align: center;
+                color:#b22222;
+            }
             #loader {
                 position:fixed;
                 display: flex;
+                font-family: '3Dventure';
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                font-family: '3Dventure';
-                font-size:100px;
+                font-size:50px;
                 color:#b22222;
                 top:0;
                 left:0;
@@ -24,7 +31,12 @@
                 overflow: hidden;
                 z-index: 9999;
                 background-color: #f5f5f5;
+                transition: 1s opacity ease-in-out;
 
+            }
+            main {
+                color: rgba(0, 0, 0, 0.75);
+                padding-top: min(10vh, 2rem);
             }
             .pulsing{
                 animation: pulse 4s infinite;
@@ -42,12 +54,58 @@
 		          transform: scale(0.95);
 	              }
            }
+           h1,
+           h2,
+           h3,
+           h4,
+           h5,
+           h6 {
+               color: black;
+           }
         </style>
-        <title>r0uge.eu</title>
+        <title>r0uge.eu | Une Api au service de l'archive</title>
     </head>
     <body>
+    <!--
         <div id="loader">
             <span class="pulsing">r0uge.eu</span>
+        </div>
+    -->
+        <div class="scroll-wrapper">
+            <main class="breakout-wrapper">
+                <span id="logo" class="pulsing">r0uge.eu</span>
+                <p class="text-center italic scale-text">Une Api au service de l'Archive.</p>
+                <p class="mt-5">
+                    Cette API a été developper dans le cadre de la réalisation du projet <i>Archives centrales</i>.
+                    Cette dernière, redirige et monitore les liens, vers l'ensemble des archives
+                    départementales française. <br>
+                </p>
+
+                 <hr>
+                 <h3>Introduction</h3>
+                 <p>
+                     URL de base de l'API r0uge: <a>http://api.r0uge.eu/</a>
+                     <br><br>
+                     Tout les appels de l'API commencent par cette URL à
+                     laquelle s'ajoute le chemin de l'action désirée.<br>
+                     Exemple: <a>http://api.r0uge.eu/departements</a>
+                     <br><br>
+                     L'API est uniquement accessible via le protocole HTTP et
+                     n'accepte que les requêtes <b>HTTP POST</b> et <b>GET</b>.
+                     Les données sont envoyées en POST et doivent respecter le <b>format
+                     JSON</b>.
+                 </p>
+                 <h3>Authentification</h3>
+                 <p>
+                     Certaines requêtes <b>doivent être authentifiées</b> pour être
+                     exécutées. Vous devrez donc générer un jeton d'Authentification
+                     après demande auprès de l'administrateur.
+                     <br><br>
+                     Les appels vers l'API nécessitant d'être authentifiés,
+                     elle doivent donc préciser dans leurs données POST un paramètre "token"
+                     avec ce jeton pour valeur.
+                 </p>
+            </main>
         </div>
     </body>
 </html>

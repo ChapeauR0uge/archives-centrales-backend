@@ -1,5 +1,7 @@
 body {
-    font-size: min(calc(0.75rem + 0.75vw), 1.25rem);
+    background-color: #f5f5f5;
+    letter-spacing: 0.7px;
+    font-size: 1.25rem;
     line-height: 1.5;
     font-family: $sans-font, $native-sans-font;
     font-weight: 400;
@@ -23,32 +25,32 @@ h6 {
 }
 
 h1 {
-    font-size: min(calc(3rem + 0.75vw), 6rem);
+    font-size: 6rem;
     margin: calc(0.5rem + 2vh) 0 calc(0.25rem + 1vh) 0;
 }
 
 h2 {
-    font-size: min(calc(2.5rem + 0.75vw), 5rem);
+    font-size: 5rem;
     margin: calc(0.5rem + 1.75vh) 0 calc(0.25rem + 0.75vh) 0;
 }
 
 h3 {
-    font-size: min(calc(2.15rem + 0.75vw), 4rem);
+    font-size: 4rem;
     margin: calc(0.5rem + 1.5vh) 0 calc(0.25rem + 0.5vh) 0;
 }
 
 h4 {
-    font-size: min(calc(1.75rem + 0.75vw), 3rem);
+    font-size: 3rem;
     margin: calc(0.5rem + 1.25vh)0 calc(0.25rem + 0.75vh) 0;
 }
 
 h5 {
-    font-size: min(calc(1.5rem + 0.75vw), 2rem);
+    font-size: 2rem;
     margin: calc(0.5rem + 1vh) 0 calc(0.25rem + 0.75vh) 0;
 }
 
 h6 {
-    font-size: min(calc(1.25rem + 0.75vw), 1.75rem);
+    font-size: 1.75rem;
     margin: calc(0.5rem + 0.75vh) 0 calc(0.25rem + 0.75vh) 0;
 }
 
@@ -166,7 +168,7 @@ strong,
 }
 
 .scale-text {
-    font-size: calc(1em - (1vw/5));
+    font-size: calc(1.2rem - (1vw/5));
 }
 
 .is-family-sans-serif {
