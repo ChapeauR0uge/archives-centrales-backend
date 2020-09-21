@@ -9,11 +9,17 @@ const departement = require('../controllers/departement.controller');
 */
 const getServices =
     (req, res) =>
-        Service.find()
+        Service.find().select('-__v -createdAt')
                 .populate({path: "dep_id", select:"name"})
                 .then( (service) => res.status(200).json(service) );
 
 
+/* Récupère les détails d'un service
+*/
+const getService =
+    (req, res) =>
+        Service.findById( req.params.id )
+                .then( (service) => res.status(200).json(service) );
 /*
 * Supprime un service.
 * DELETE /:id
@@ -60,6 +66,7 @@ const eraseService =
 
 /*For APIRest*/
 module.exports.getServices = getServices;
+module.exports.getService = getService;
 module.exports.deleteService = deleteService;
 module.exports.updateService = updateService;
 

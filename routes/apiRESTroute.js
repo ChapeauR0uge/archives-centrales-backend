@@ -22,6 +22,7 @@ router.post( '/departements/:depId/services', [auth.verifyToken, auth.isAdmin], 
 
 //Routes for Services
 router.get('/services', service.getServices);
+router.get('/services/:id', service.getService);
 router.delete('/services/:id', [auth.verifyToken, auth.isAdmin], service.deleteService);
 router.put('/services/:id', [auth.verifyToken, auth.isAdmin], service.updateService);
 

@@ -7,14 +7,17 @@
         <meta name="keywords" content="rouge, r0uge.eu ,api, API, archive, centrales">
         <link rel="stylesheet" href="./css/fonts.css">
         <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/loader.css">
         <link rel="stylesheet" href="prism.css">
         <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
         <script defer src="./prism.js"></script>
+        <script defer src="./main.js"></script>
         <style type="text/css" >
             #logo{
                 font-family: '3Dventure';
                 font-size:5rem;
                 text-align: center;
+                cursor:default;
                 color:#b22222;
             }
             #loader {
@@ -24,7 +27,7 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                font-size:50px;
+                font-size:7vh;
                 color:#b22222;
                 top:0;
                 left:0;
@@ -35,6 +38,17 @@
                 background-color: #f5f5f5;
                 transition: 1s opacity ease-in-out;
 
+            }
+            .red{
+                color: #b22222;
+            }
+            .sk-fold-cube{
+                color: #f5f5f5;
+            }
+            .box{
+                border-color: #b22222;
+                border-width: 1px;
+                border-style: dashed none;
             }
             main {
                 color: rgba(0, 0, 0, 0.75);
@@ -56,12 +70,48 @@
 		          transform: scale(0.95);
 	              }
            }
+           @keyframes heartBeat {
+              0% {
+                transform: scale(1);
+              }
+
+              14% {
+                transform: scale(1.3);
+              }
+
+              28% {
+                transform: scale(1);
+              }
+
+              42% {
+                transform: scale(1.3);
+              }
+
+              70% {
+                transform: scale(1);
+              }
+            }
+            @keyframes slideOutUp {
+              from {
+                transform: translate3d(0, 0, 0);
+              }
+
+              to {
+                visibility: hidden;
+                transform: translate3d(0, -100%, 0);
+              }
+            }
+
+            .slideOutUp {
+              animation-name: slideOutUp;
+            }
            h1,
            h2,
            h3,
            h4,
            h6 {
                color: black;
+               display:inline-block;;
            }
            h5{
                color: #b22222;
@@ -69,15 +119,33 @@
            hr{
                background-color:#b22222;
            }
+           p.arrow:hover{
+               animation: heartBeat 1s infinite;
+               cursor:pointer;
+               color:#5c3232;
+           }
+           .title_anim{
+               font-family: '3Dventure';
+               animation: pulse 4s infinite;
+               color: #b22222;
+               display: inline-block;
+           }
         </style>
         <title>r0uge.eu | Une Api au service de l'archive</title>
     </head>
     <body>
-    <!--
+        <!--LOADER-->
         <div id="loader">
             <span class="pulsing">r0uge.eu</span>
+            <div id="loaded" class="sk-fold red">
+                <div class="sk-fold-cube"></div>
+                <div class="sk-fold-cube"></div>
+                <div class="sk-fold-cube"></div>
+                <div class="sk-fold-cube"></div>
+            </div>
+             <p onClick="nextPage()" id="arw" class="arrow">^</p>
         </div>
-    -->
+        <!--Main -->
         <div class="scroll-wrapper">
             <main class="breakout-wrapper">
                 <span id="logo" class="pulsing">r0uge.eu</span>
@@ -89,7 +157,7 @@
                 </p>
 
                  <hr>
-                 <h3>Introduction</h3>
+                 <h3><span class="title_anim">-</span> Introduction</h3>
                  <p>
                      URL de base de l'API r0uge: <a>https://api.r0uge.eu/</a>
                      <br><br>
@@ -104,7 +172,7 @@
                  </p>
 
                  <hr>
-                 <h3>Authentification</h3>
+                 <h3><span class="title_anim">-</span> Authentification</h3>
                  <p>
                      Certaines requêtes <b>doivent être authentifiées</b> pour être
                      exécutées. Vous devrez donc générer un jeton d'Authentification
@@ -116,7 +184,7 @@
                  </p>
 
                  <hr>
-                 <h3>Statut du retour</h3>
+                 <h3><span class="title_anim">-</span> Statut du retour</h3>
                  <p>Chaque appel à l'API donne lieu à une <b>réponse</b>, retournant un <b>code spécifique</b>
                      en fonction du résultat obtenu.
                      L'analyse de ce code vous permet de vous assurer que la requête a été traitée avec succès.
@@ -137,10 +205,13 @@
                  </ul>
 
                  <hr>
-                 <h3>Liste des actions </h3>
+                 <h3><span class="title_anim">-</span> Liste des actions </h3>
 
                  <h5>Récupération de la liste des départements</h5>
-                 <h6>Format de la réponse</h6>
+                 <div class="box">
+                     <b class="red">GET</b> /departements
+                 </div>
+                 <h6><| Format de la réponse</h6>
                  <pre class="pre"><code class="language-json code">
 {
     [
@@ -150,7 +221,6 @@
             "dep_id":2,
             "name":"",
             "homePage":"",
-            "createdAt":"yyyy-mm-ddThh:mm:ss.dcmZ",
             "updatedAt":"yyyy-mm-ddThh:mm:ss.dcmZ"
         },
         ...
@@ -194,11 +264,6 @@
                             <td>Lien du site des archives du département</td>
                         </tr>
                         <tr>
-                            <td>createdAt</td>
-                            <td>Format ISO</td>
-                            <td>Date de création du département dans la BDD</td>
-                        </tr>
-                        <tr>
                             <td>updatedAt</td>
                             <td>Format ISO</td>
                             <td>Date de la dernière mise à jour du département</td>
@@ -206,8 +271,259 @@
                         </tbody>
                     </table>
                 </div>
+                <h6> <|> Exemple</h6>
+                <code class="lang-bash">curl --ssl-reqd -H "Content-Type: application/json" -X GET
+                    , "url":"api.r0uge.eu"}' https://api.r0uge.eu/departements</code>
                 <p></p>
                 <h5>Récupération de la liste des services</h5>
+                <div class="box">
+                    <b class="red">GET</b> /services
+                </div>
+                <h6><| Format de la réponse</h6>
+                <pre class="pre"><code class="language-json code">
+{
+    [
+        {
+            "_id":"",
+            "dep_id":{
+                "_id":"",
+                "name":""
+            },
+            "service_name":"",
+            "status":"offline",
+            "link":"",
+            "updatedAt":"yyyy-mm-ddThh:mm:ss.dcmZ"
+        },
+        ...
+    ]
+}
+               </code></pre>
+               <p>Renvoie la liste de tout les services</p>
+               <div class="table-container">
+                   <table>
+                       <thead>
+                           <tr>
+                               <th>Nom</th>
+                               <th>Type</th>
+                               <th>Description</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                       <tr>
+                           <td>_id</td>
+                           <td>String</td>
+                           <td>Identifiant du service</td>
+                       </tr>
+                       <tr>
+                           <td>dep_id._id</td>
+                           <td>String</td>
+                           <td>Indentifiant du département auquel appartient le service</td>
+                       </tr>
+                       <tr>
+                           <td>dep_id.name</td>
+                           <td>String</td>
+                           <td>Nom du département auquel appartient le service</td>
+                       </tr>
+                       <tr>
+                           <td>service_name</td>
+                           <td>String</td>
+                           <td>Nom du service</td>
+                       </tr>
+                       <tr>
+                           <td>status</td>
+                           <td>String</td>
+                           <td>Status du service (en-ligne/ hors-ligne)</td>
+                       </tr>
+                       <tr>
+                           <td>link</td>
+                           <td>String</td>
+                           <td>Lien vers lequel le service pointe</td>
+                       </tr>
+                       <tr>
+                           <td>updatedAt</td>
+                           <td>Format ISO</td>
+                           <td>Date de la dernière mise à jour du service</td>
+                       </tr>
+                       </tbody>
+                   </table>
+               </div>
+               <h6> <|> Exemple</h6>
+               <code class="lang-bash">curl --ssl-reqd -H "Content-Type: application/json" -X GET
+                   , "url":"api.r0uge.eu"}' https://api.r0uge.eu/services</code>
+               <p></p>
+               <!-- -->
+               <h5>Récupération d'un des services</h5>
+               <div class="box">
+                   <b class="red">GET</b> /services/<i class="red">:id</i>
+               </div>
+               <h6>|> Format de la requête</h6>
+               <div class="table-container">
+                   <table>
+                       <thead>
+                           <tr>
+                               <th>Nom</th>
+                               <th>Requis</th>
+                               <th>Type</th>
+                               <th>Valeur par défaut</th>
+                               <th>Description</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <tr>
+                               <td>:id</td>
+                               <td>Oui</td>
+                               <td>String</td>
+                               <td>Aucune</td>
+                               <td>Identifiant du service</td>
+                           </tr>
+                       </tbody>
+                   </table>
+               </div>
+               <h6><| Format de la réponse</h6>
+               <pre class="pre"><code class="language-json code">
+{
+    "_id":"",
+    "dep_id":{
+        "_id":"",
+        "name":""
+    },
+    "service_name":"",
+    "status":"offline",
+    "link":"",
+    "updatedAt":"yyyy-mm-ddThh:mm:ss.dcmZ"
+}
+              </code></pre>
+              <div class="table-container">
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Nom</th>
+                              <th>Type</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                          <td>_id</td>
+                          <td>String</td>
+                          <td>Identifiant du service</td>
+                      </tr>
+                      <tr>
+                          <td>dep_id._id</td>
+                          <td>String</td>
+                          <td>Indentifiant du département auquel appartient le service</td>
+                      </tr>
+                      <tr>
+                          <td>dep_id.name</td>
+                          <td>String</td>
+                          <td>Nom du département auquel appartient le service</td>
+                      </tr>
+                      <tr>
+                          <td>service_name</td>
+                          <td>String</td>
+                          <td>Nom du service</td>
+                      </tr>
+                      <tr>
+                          <td>status</td>
+                          <td>String</td>
+                          <td>Status du service (en-ligne/ hors-ligne)</td>
+                      </tr>
+                      <tr>
+                          <td>link</td>
+                          <td>String</td>
+                          <td>Lien vers lequel le service pointe</td>
+                      </tr>
+                      <tr>
+                          <td>updatedAt</td>
+                          <td>Format ISO</td>
+                          <td>Date de la dernière mise à jour du service</td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <p></p>
+              <!-- -->
+              <h5>Récupération d'un des départements</h5>
+              <div class="box">
+                  <b class="red">GET</b> /departements/<i class="red">:dep_num</i>
+              </div>
+               <h6>|> Format de la requête</h6>
+               <div class="table-container">
+                   <table>
+                       <thead>
+                           <tr>
+                               <th>Nom</th>
+                               <th>Requis</th>
+                               <th>Type</th>
+                               <th>Valeur par défaut</th>
+                               <th>Description</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <tr>
+                               <td>:dep_num</td>
+                               <td>Oui</td>
+                               <td>Int</td>
+                               <td>Aucune</td>
+                               <td>Numéro du département</td>
+                           </tr>
+                       </tbody>
+                   </table>
+               </div>
+               <h6><| Format de la réponse</h6>
+               <pre class="pre"><code class="language-json code">
+{
+    "services":[""],
+    "_id":"",
+    "dep_id":2,
+    "name":"",
+    "homePage":"",
+    "updatedAt":"yyyy-mm-ddThh:mm:ss.dcmZ"
+}
+              </code></pre>
+              <div class="table-container">
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Nom</th>
+                              <th>Type</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                          <td>_id</td>
+                          <td>String</td>
+                          <td>Identifiant du département</td>
+                      </tr>
+                      <tr>
+                          <td>services</td>
+                          <td>List</td>
+                          <td>Liste contenant l'identifiant de chaque service du département</td>
+                      </tr>
+                      <tr>
+                          <td>dep_id</td>
+                          <td>Int</td>
+                          <td>Numéro du département</td>
+                      </tr>
+                      <tr>
+                          <td>name</td>
+                          <td>String</td>
+                          <td>Nom du département</td>
+                      </tr>
+                      <tr>
+                          <td>homePage</td>
+                          <td>String</td>
+                          <td>Lien du site des archives du département</td>
+                      </tr>
+                      <tr>
+                          <td>updatedAt</td>
+                          <td>Format ISO</td>
+                          <td>Date de la dernière mise à jour du département</td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
             </main>
         </div>
     </body>

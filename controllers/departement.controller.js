@@ -6,7 +6,7 @@ const service = require('../controllers/service.controller');
 
 const getDepartements =
     (req, res) =>
-        Departement.find()
+        Departement.find().select('-__v -createdAt')
                  .then( sv => res.status(200).json(sv) );
 
 
