@@ -7,7 +7,9 @@
         <meta name="keywords" content="rouge, r0uge.eu ,api, API, archive, centrales">
         <link rel="stylesheet" href="./css/fonts.css">
         <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="prism.css">
         <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+        <script defer src="./prism.js"></script>
         <style type="text/css" >
             #logo{
                 font-family: '3Dventure';
@@ -58,9 +60,14 @@
            h2,
            h3,
            h4,
-           h5,
            h6 {
                color: black;
+           }
+           h5{
+               color: #b22222;
+           }
+           hr{
+               background-color:#b22222;
            }
         </style>
         <title>r0uge.eu | Une Api au service de l'archive</title>
@@ -84,17 +91,19 @@
                  <hr>
                  <h3>Introduction</h3>
                  <p>
-                     URL de base de l'API r0uge: <a>http://api.r0uge.eu/</a>
+                     URL de base de l'API r0uge: <a>https://api.r0uge.eu/</a>
                      <br><br>
                      Tout les appels de l'API commencent par cette URL à
                      laquelle s'ajoute le chemin de l'action désirée.<br>
-                     Exemple: <a>http://api.r0uge.eu/departements</a>
+                     Exemple: <a>https://api.r0uge.eu/departements</a>
                      <br><br>
                      L'API est uniquement accessible via le protocole HTTP et
                      n'accepte que les requêtes <b>HTTP POST</b> et <b>GET</b>.
                      Les données sont envoyées en POST et doivent respecter le <b>format
                      JSON</b>.
                  </p>
+
+                 <hr>
                  <h3>Authentification</h3>
                  <p>
                      Certaines requêtes <b>doivent être authentifiées</b> pour être
@@ -105,6 +114,100 @@
                      elle doivent donc préciser dans leurs données POST un paramètre "token"
                      avec ce jeton pour valeur.
                  </p>
+
+                 <hr>
+                 <h3>Statut du retour</h3>
+                 <p>Chaque appel à l'API donne lieu à une <b>réponse</b>, retournant un <b>code spécifique</b>
+                     en fonction du résultat obtenu.
+                     L'analyse de ce code vous permet de vous assurer que la requête a été traitée avec succès.
+                     <br><br>
+                     Tous les codes >= 400 indiquent que la requête n'a pas été traitée avec succès par nos serveurs.
+                 </p>
+                 <ul>
+                     <li><b>200:</b> OK.</li>
+                     <li><b>204:</b> Aucune donnée disponible ou ajoutée (la requête est bien formée,
+                         mais aucune donnée ne correspond). </li>
+                     <li><b>400:</b> Paramètre manquant, ou valeur incorrecte.</li>
+                     <li><b>401:</b> Authentification nécessaire (jeton non précisé ou invalide).</li>
+                     <li><b>403:</b> Action non autorisée.</li>
+                     <li><b>404:</b> Page inaccessible (URL inconnue / impossible d'accéder à l'adresse).</li>
+                     <li><b>406:</b> Le JSON indiqué en données POST n'est pas valide.</li>
+                     <li><b>500:</b>  Erreur inconnue, contactez-nous.</li>
+                     <li><b>503:</b> L'API est momentanément indisponible, réessayez dans quelques minutes.</li>
+                 </ul>
+
+                 <hr>
+                 <h3>Liste des actions </h3>
+
+                 <h5>Récupération de la liste des départements</h5>
+                 <h6>Format de la réponse</h6>
+                 <pre class="pre"><code class="language-json code">
+{
+    [
+        {
+            "services":[""],
+            "_id":"",
+            "dep_id":2,
+            "name":"",
+            "homePage":"",
+            "createdAt":"yyyy-mm-ddThh:mm:ss.dcmZ",
+            "updatedAt":"yyyy-mm-ddThh:mm:ss.dcmZ"
+        },
+        ...
+    ]
+}
+                </code></pre>
+                <p>Renvoie la liste de tout les départements.</p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>_id</td>
+                            <td>String</td>
+                            <td>Identifiant du département</td>
+                        </tr>
+                        <tr>
+                            <td>services</td>
+                            <td>List</td>
+                            <td>Liste contenant l'identifiant de chaque service du département</td>
+                        </tr>
+                        <tr>
+                            <td>dep_id</td>
+                            <td>Int</td>
+                            <td>Numéro du département</td>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td>String</td>
+                            <td>Nom du département</td>
+                        </tr>
+                        <tr>
+                            <td>homePage</td>
+                            <td>String</td>
+                            <td>Lien du site des archives du département</td>
+                        </tr>
+                        <tr>
+                            <td>createdAt</td>
+                            <td>Format ISO</td>
+                            <td>Date de création du département dans la BDD</td>
+                        </tr>
+                        <tr>
+                            <td>updatedAt</td>
+                            <td>Format ISO</td>
+                            <td>Date de la dernière mise à jour du département</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p></p>
+                <h5>Récupération de la liste des services</h5>
             </main>
         </div>
     </body>
