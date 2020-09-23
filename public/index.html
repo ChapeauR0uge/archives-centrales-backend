@@ -130,6 +130,11 @@
                color: #b22222;
                display: inline-block;
            }
+           footer{
+               color: #b22222;
+               margin-top: -40px;
+               font-size: 1rem;
+           }
         </style>
         <title>r0uge.eu | Une Api au service de l'archive</title>
     </head>
@@ -147,6 +152,38 @@
         </div>
         <!--Main -->
         <div class="scroll-wrapper">
+            <!--
+            <nav class="menu">
+                <ul>
+                    <li>
+                        <a href="#overview">Introduction</a>
+                    </li>
+                    <li>
+                        <a href="#auth">Authentification</a>
+                    </li>
+                    <li>
+                        <a href="#response">Status du retour</a>
+                    </li>
+                    <li>
+                        <a href="#actions">Actions</a>
+                        <ul>
+                            <li>
+                                <a href="#getdepartements">Récupération de la liste des départements</a>
+                            </li>
+                            <li>
+                                <a href="#getservices">Récupération de la liste des services</a>
+                            </li>
+                            <li>
+                                <a href="#getservice">Récupération d'un des services</a>
+                            </li>
+                            <li>
+                                <a href="#getdepartement">Récupération d'un des départements</a>
+                            </li>
+                        </ul>
+                    </li>
+                <ul>
+            <nav>
+            -->
             <main class="breakout-wrapper">
                 <span id="logo" class="pulsing">r0uge.eu</span>
                 <p class="text-center italic scale-text">Une Api au service de l'Archive.</p>
@@ -157,7 +194,7 @@
                 </p>
 
                  <hr>
-                 <h3><span class="title_anim">-</span> Introduction</h3>
+                 <h3 id="overview"><span class="title_anim">-</span> Introduction</h3>
                  <p>
                      URL de base de l'API r0uge: <a>https://api.r0uge.eu/</a>
                      <br><br>
@@ -172,7 +209,7 @@
                  </p>
 
                  <hr>
-                 <h3><span class="title_anim">-</span> Authentification</h3>
+                 <h3 id="auth"><span class="title_anim">-</span> Authentification</h3>
                  <p>
                      Certaines requêtes <b>doivent être authentifiées</b> pour être
                      exécutées. Vous devrez donc générer un jeton d'Authentification
@@ -184,7 +221,7 @@
                  </p>
 
                  <hr>
-                 <h3><span class="title_anim">-</span> Statut du retour</h3>
+                 <h3 id="response"><span class="title_anim">-</span> Statut du retour</h3>
                  <p>Chaque appel à l'API donne lieu à une <b>réponse</b>, retournant un <b>code spécifique</b>
                      en fonction du résultat obtenu.
                      L'analyse de ce code vous permet de vous assurer que la requête a été traitée avec succès.
@@ -205,9 +242,9 @@
                  </ul>
 
                  <hr>
-                 <h3><span class="title_anim">-</span> Liste des actions </h3>
+                 <h3 id="actions"><span class="title_anim">-</span> Liste des actions </h3>
 
-                 <h5>Récupération de la liste des départements</h5>
+                 <h5 id="getdepartements">Récupération de la liste des départements</h5>
                  <div class="box">
                      <b class="red">GET</b> /departements
                  </div>
@@ -272,10 +309,9 @@
                     </table>
                 </div>
                 <h6> <|> Exemple</h6>
-                <code class="lang-bash">curl --ssl-reqd -H "Content-Type: application/json" -X GET
-                    , "url":"api.r0uge.eu"}' https://api.r0uge.eu/departements</code>
+                <code class="lang-bash">curl -H "Content-Type: application/json" -X GET https://api.r0uge.eu/departements</code>
                 <p></p>
-                <h5>Récupération de la liste des services</h5>
+                <h5 id="getservices">Récupération de la liste des services</h5>
                 <div class="box">
                     <b class="red">GET</b> /services
                 </div>
@@ -348,11 +384,10 @@
                    </table>
                </div>
                <h6> <|> Exemple</h6>
-               <code class="lang-bash">curl --ssl-reqd -H "Content-Type: application/json" -X GET
-                   , "url":"api.r0uge.eu"}' https://api.r0uge.eu/services</code>
+               <code class="lang-bash">curl -H "Content-Type: application/json" -X GET https://api.r0uge.eu/services</code>
                <p></p>
                <!-- -->
-               <h5>Récupération d'un des services</h5>
+               <h5 id="getservice">Récupération d'un des services</h5>
                <div class="box">
                    <b class="red">GET</b> /services/<i class="red">:id</i>
                </div>
@@ -393,6 +428,7 @@
     "updatedAt":"yyyy-mm-ddThh:mm:ss.dcmZ"
 }
               </code></pre>
+              <p>Si le service n'a pas été trouvé, nous obtenons un objet vide. </p>
               <div class="table-container">
                   <table>
                       <thead>
@@ -443,7 +479,7 @@
               </div>
               <p></p>
               <!-- -->
-              <h5>Récupération d'un des départements</h5>
+              <h5 id="getdepartement">Récupération d'un des départements</h5>
               <div class="box">
                   <b class="red">GET</b> /departements/<i class="red">:dep_num</i>
               </div>
@@ -481,6 +517,7 @@
     "updatedAt":"yyyy-mm-ddThh:mm:ss.dcmZ"
 }
               </code></pre>
+              <p>Si le département n'a pas été trouvé, nous obtenons un objet vide.</p>
               <div class="table-container">
                   <table>
                       <thead>
@@ -524,7 +561,11 @@
                       </tbody>
                   </table>
               </div>
+              <hr>
             </main>
         </div>
     </body>
+    <footer>
+        <p>r0uge.eu ©2019-2020</p>
+    </footer>
 </html>
