@@ -18,7 +18,7 @@ router.put( '/departements/:depId', [auth.verifyToken, auth.isAdmin], departemen
 router.delete( '/departements/:depId', [auth.verifyToken, auth.isAdmin], departement.deleteDepartement );
 
 router.get( '/departements/:depId/services',  departement.getDepartementWithService );
-router.post( '/departements/:depId/services', [auth.verifyToken, auth.isAdmin], departement.createServiceInDepartement );
+router.post( '/departements/:depId/services', upload.verifyUpload ,[auth.verifyToken, auth.isAdmin], departement.createServiceInDepartement );
 
 //Routes for Services
 router.get('/services', service.getServices);
