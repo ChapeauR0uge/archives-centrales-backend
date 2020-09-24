@@ -7,7 +7,7 @@ const service = require('../controllers/service.controller');
 const user = require('../controllers/user.controller');
 
 // import middleswars
-const { auth } = require('../middlewares');
+const { auth , upload } = require('../middlewares');
 
 //Routes for departement
 router.get( '/departements', departement.getDepartements );

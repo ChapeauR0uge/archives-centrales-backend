@@ -1,0 +1,13 @@
+.menu {
+    font-family: 'Butler';
+}
+
+#main-menu{
+    color:black;
+    border-bottom: none;
+}
+
+#main-menu:hover{
+    border-bottom: 1px solid;
+    border-color: #b22222;
+}

@@ -18,7 +18,11 @@ const depSchema = new mongoose.Schema({
     services : [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Service'
-    }]
+    }],
+    img : {
+        data: Buffer,
+        contentType: String
+    }
 },{
     timestamps: true,
 });
