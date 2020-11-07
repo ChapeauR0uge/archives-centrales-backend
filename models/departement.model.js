@@ -20,7 +20,7 @@ const depSchema = new mongoose.Schema({
         ref: 'Service'
     }],
     img : {
-        data: Buffer,
+        data: String,
         contentType: String
     }
 },{
