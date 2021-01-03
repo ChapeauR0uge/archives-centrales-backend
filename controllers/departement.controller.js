@@ -21,7 +21,7 @@ const getDepartementWithService =
 */
 const getDetail =
     (req, res) =>
-        Departement.findById({ 'dep_id' : req.params.depId })
+        Departement.findOne({ '_id' : req.params.depId })
                  .then( arc => res.status(200).json(arc) );
 
 /*Creation d'un département
