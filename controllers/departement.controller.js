@@ -17,12 +17,21 @@ const getDepartementWithService =
                    .then(dep => res.status(200).json(dep));
 /*
 * Récupère les details archives d'un département
-* GET /:depId
+* GET /:depId ou _id
 */
 const getDetail =
-    (req, res) =>
-        Departement.findOne({ '_id' : req.params.depId })
-                 .then( arc => res.status(200).json(arc) );
+    (req, res) => {
+        let p = Number(req.params.depId);
+        if( p > 1 && p < 95){
+            Departement.findOne({'dep_id' : req.params.depId})
+                       .then( arc => res.status(200).json(arc) )
+                       .catch( err => res.status(204).json(err) );
+        }else{
+            Departement.findOne({ '_id' : req.params.depId })
+                       .then( arc => res.status(200).json(arc) )
+                       .catch( err => res.status(204).json(err) );
+        }
+    }
 
 /*Creation d'un département
 * POST /
