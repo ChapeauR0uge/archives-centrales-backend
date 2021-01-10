@@ -231,8 +231,6 @@
                  </p>
                  <ul>
                      <li><b>200:</b> OK.</li>
-                     <li><b>204:</b> Aucune donnée disponible ou ajoutée (la requête est bien formée,
-                         mais aucune donnée ne correspond). </li>
                      <li><b>400:</b> Paramètre manquant, ou valeur incorrecte.</li>
                      <li><b>401:</b> Authentification nécessaire (jeton non précisé ou invalide).</li>
                      <li><b>403:</b> Action non autorisée.</li>
@@ -564,7 +562,7 @@
     "updatedAt":"yyyy-mm-ddThh:mm:ss.dcmZ"
 }
               </code></pre>
-              <p>Si le département n'a pas été trouvé, nous obtenons un objet vide.</p>
+              <p>Si le département n'a pas été trouvé, nous obtenons une erreur 404.</p>
               <div class="table-container">
                   <table>
                       <thead>

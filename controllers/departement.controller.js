@@ -22,14 +22,14 @@ const getDepartementWithService =
 const getDetail =
     (req, res) => {
         let p = Number(req.params.depId);
-        if( p > 1 && p < 95){
+        if( p > 0 && p < 95){
             Departement.findOne({'dep_id' : req.params.depId})
                        .then( arc => res.status(200).json(arc) )
-                       .catch( err => res.status(204).json(err) );
+                       .catch( err => res.status(404).json({"error":"departement not found !"}) );
         }else{
             Departement.findOne({ '_id' : req.params.depId })
                        .then( arc => res.status(200).json(arc) )
-                       .catch( err => res.status(204).json(err) );
+                       .catch( err => res.status(404).json({"error":"departement not found !"}) );
         }
     }
 
@@ -41,7 +41,7 @@ const createDepartement =
         let newDep = { ...req.body };
         Departement.create(newDep)
                    .then(dep => res.status(200).json(dep))
-                   .catch( err => res.status(400).json(err) );
+                   .catch( err => res.status(400).json({"error":err}));
 
     }
 
